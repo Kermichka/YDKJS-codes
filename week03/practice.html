@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Word Details</title>
+</head>
+
+<body>
+    <input type="text" id="wordInput" placeholder="Enter a word">
+    <div id="details"></div>
+
+    <script>
+        document.getElementById("wordInput").addEventListener("input", showDetails);
+        function showDetails() {
+            let charList = {};
+            const countAndSort = () => {
+                const word = this.value;
+                for (let i = 0; i < word.length; i++) {
+                    const char = word.substring(i, i + 1);//взимаме буква по буква
+                    if (!(char in charList)) {
+                        //adding a new property
+                        charList[char] = 1
+                    }
+                    else {
+                        //increasing the counter of the property
+                        charList[char]++;
+                    }
+                }
+
+                const charArray = Object.entries(charList);//Не използваме Object.keys(), защото не пази стойностите на пропъртитата
+                charArray.sort();//сортираме по азбучен ред
+                charArray.sort((a, b) => b[1] - a[1]);//сортираме пропъртитата по стойности
+                /*
+                    а е първият обект, b вторият и от тях взимаме стойностите на преброяването им
+                    Изваждането на a[1] от b[1] дава <0,0,0>
+                        Ако b[1] - a[1] е отрицателно число, това означава, че
+                        b ще е след a.
+
+                        Ако b[1] - a[1] е положително число, това означава, че
+                        b ще е преди a..
+
+                        Ако b[1] - a[1] е нула, това означава, че
+                        реда им се запазва.
+                        Ако беше a[1] - b[1], щеше да е възходящ ред
+                */
+                charList = Object.fromEntries(charArray)
+            }
+            const print = () => {
+                let result = "";
+                for (var [char, count] of Object.entries(charList)) {
+                    result += char + " - " + count + "<br>";
+                }
+                let detailsDiv = document.getElementById("details");
+                detailsDiv.innerHTML = result;
+            }
+            countAndSort();
+            print();
+        }
+    </script>
+</body>
+
+</html>
