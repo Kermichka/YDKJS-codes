@@ -54,7 +54,6 @@ class UserConnector {
 }
 (async function fetchData () {
   const a = new UserConnector('https://dummyjson.com/users');
-  const b = new UserConnector('https://dummyjson.com/products');
   await a.connect();
   console.log('Count');
   console.log(a.count());
@@ -72,6 +71,4 @@ class UserConnector {
   console.log(a.companyDepartments());
   console.log('Average height');
   console.log(a.averageHeight());
-  await b.connect();
-  console.log(b.count());
 })();
