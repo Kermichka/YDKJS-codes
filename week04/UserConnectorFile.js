@@ -54,7 +54,9 @@ class UserConnector {
 }
 (async function fetchData () {
   const a = new UserConnector('https://dummyjson.com/users');
+  const b = new UserConnector('https://dummyjson.com/products');
   await a.connect();
+  console.log(b.count())
   console.log('Count');
   console.log(a.count());
   console.log('Filtered Name');
