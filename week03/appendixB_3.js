@@ -1,26 +1,24 @@
-function toggle(...values) {
-    let currIndex = 0;
-    return function printCurrentWord(){
-        if(currIndex===values.length){
-            currIndex =0;
-        }
-        console.log(values[currIndex]);
-        currIndex++;
-    }   
-    
+function toggle (...values) {
+  let currIndex = 0;
+  return function printCurrentWord () {
+    console.log(values[currIndex % values.length]);
+    currIndex++;
+  };
 }
 
-var hello = toggle("hello");
-var onOff = toggle("on","off");
-var speed = toggle("slow","medium","fast");
-hello();      // "hello"
-hello();      // "hello"
+const hello = toggle('hello');
+const onOff = toggle('on', 'off');
+const speed = toggle('slow', 'medium', 'fast');
 
-onOff();      // "on"
-onOff();      // "off"
-onOff();      // "on"
+hello(); // "hello"
+hello(); // "hello"
 
-speed();      // "slow"
-speed();      // "medium"
-speed();      // "fast"
-speed();      // "slow"
+onOff(); // "on"
+onOff(); // "off"
+onOff(); // "on"
+onOff();
+
+speed(); // "slow"
+speed(); // "medium"
+speed(); // "fast"
+speed(); // "slow"
